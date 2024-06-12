@@ -96,7 +96,7 @@ section .text
 		
 		output_i_judge:
 		cmp ebx, 10
-		jl output_buf
+		jl output_buf; for 0 to range 10 printf("%ld ", buf[i])
 		
 		xor eax, eax
 		pop rbx
