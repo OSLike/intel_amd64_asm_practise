@@ -42,7 +42,7 @@ section .text
 
 		xor ebx, ebx
 		mov eax, 10
-		jmp initial_buf_judge
+		jmp short initial_buf_judge
 		
 		initial_buf:
 		dec eax
@@ -51,20 +51,20 @@ section .text
 		
 		initial_buf_judge:
 		cmp ebx, 10
-		jl initial_buf ; for 0 to range 10 init buf[10]
+		jl short initial_buf ; for 0 to range 10 init buf[10]
 		
 		xor r12, r12
-		jmp buf_i_judge
+		jmp short buf_i_judge
 		
 		buf_j_i:
 		xor r13, r13
-		jmp buf_j_i_judge
+		jmp short buf_j_i_judge
 		
 		buf_bubble:
 		mov rax, [rbp+r12*8-0x50]
 		mov rcx, [rbp+r13*8-0x50]
 		cmp rax, rcx
-		jae bubble_continue
+		jae short bubble_continue
 		
 		mov [rbp+r12*8-0x50], rcx
 		mov [rbp+r13*8-0x50], rax
@@ -74,19 +74,19 @@ section .text
 		
 		buf_j_i_judge:
 		cmp r13, r12
-		jl buf_bubble
+		jl short buf_bubble
 		
 		inc r12
 		
 		buf_i_judge:
 		cmp r12, 10
-		jl buf_j_i
+		jl short buf_j_i
 		
 		; for 0 to range 10 buf[i] --> rax  r12 --> i
 		; for 0 to range i  buf[j] --> rcx  r13 --> j
 		
 		xor ebx, ebx
-		jmp output_i_judge
+		jmp short output_i_judge
 		
 		output_buf:
 		lea rdi, str1
@@ -96,7 +96,7 @@ section .text
 		
 		output_i_judge:
 		cmp ebx, 10
-		jl output_buf
+		jl short output_buf
 		
 		xor eax, eax
 		pop rbx

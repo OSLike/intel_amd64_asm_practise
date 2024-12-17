@@ -1,6 +1,7 @@
 from pwn import *
 context.log_level = 'debug'
-io = remote("localhost", 12347)
+#io = remote("localhost", 12347)
+io = process(r"./libc&syscall")
 elf = ELF(r"./libc&syscall")
 libc = ELF('./libc.so.6')
 rop = ROP(elf)
